@@ -1,0 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS Custom Properties ─────────────────────────────────── */
+:root {
+  --neon-cyan: #00f5ff;
+  --neon-purple: #b44fff;
+  --neon-pink: #ff2d78;
+  --dark-950: #050508;
+  --dark-900: #0a0a12;
+  --dark-800: #10101e;
+}
+
+/* ─── Base Reset ─────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--dark-950);
+  color: #e2e8f0;
+  font-family: "Inter", system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ─── Custom Scrollbar ───────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark-900);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neon-purple);
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-cyan);
+}
+
+/* ─── Utility: Neon text gradient ───────────────────────────── */
+@layer utilities {
+  .text-neon-gradient {
+    background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-purple) 60%, var(--neon-pink) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glow-cyan {
+    text-shadow: 0 0 20px rgba(0, 245, 255, 0.7), 0 0 40px rgba(0, 245, 255, 0.3);
+  }
+
+  .border-neon {
+    border: 1px solid rgba(0, 245, 255, 0.25);
+  }
+
+  .glass {
+    background: rgba(16, 16, 30, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .noise-overlay::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.04;
+  }
+
+  /* Animated underline for nav links */
+  .nav-link-underline {
+    position: relative;
+  }
+
+  .nav-link-underline::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0%;
+    height: 1.5px;
+    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+    transition: width 0.3s ease;
+    border-radius: 99px;
+  }
+
+  .nav-link-underline:hover::after {
+    width: 100%;
+  }
+}
