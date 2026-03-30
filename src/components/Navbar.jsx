@@ -66,15 +66,8 @@ export default function Navbar() {
           className="nav-item flex items-center gap-2 group"
           aria-label="Home"
         >
-          {/* Animated bracket logo */}
-          <span className="font-mono text-xl font-bold text-neon-cyan group-hover:glow-cyan transition-all duration-300">
-            &lt;
-          </span>
-          <span className="font-mono text-lg font-bold text-white tracking-wider">
-            dev
-          </span>
-          <span className="font-mono text-xl font-bold text-neon-purple group-hover:text-neon-pink transition-colors duration-300">
-            /&gt;
+          <span className="font-sans text-xl font-bold text-white tracking-wide">
+            Code By <span className="text-neon-cyan">Sohail</span>
           </span>
         </a>
 

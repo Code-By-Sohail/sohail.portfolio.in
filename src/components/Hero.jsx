@@ -2,15 +2,6 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import MagneticButton from "./MagneticButton";
 
-/* ─ Animated cursor-blink caret ─────────────────────────────── */
-function Caret() {
-  return (
-    <span
-      className="inline-block ml-1 w-[3px] h-[0.9em] bg-neon-cyan rounded-sm align-middle"
-      style={{ animation: "blink 1.1s step-end infinite" }}
-    />
-  );
-}
 
 export default function Hero() {
   const sectionRef = useRef(null);
@@ -162,14 +153,14 @@ export default function Hero() {
             text-white mb-6 perspective-[1000px]
           "
           style={{ perspective: "1000px" }}
-          aria-label="I build high-converting websites for businesses"
+          aria-label="Hi, I'm Sohail, building high-converting websites for businesses"
         >
-          {"I build high-converting websites for businesses"
+          {"Hi, I'm Sohail, building high-converting websites for businesses"
             .split(" ")
             .map((word, i) => (
               <span
                 key={i}
-                className={`hero-word inline-block mr-[0.22em] ${word.includes("high-converting") || word.includes("websites")
+                className={`hero-word inline-block mr-[0.22em] ${word.includes("high-converting") || word.includes("websites") || word.includes("Sohail")
                     ? "text-neon-gradient"
                     : "text-white"
                   }`}
@@ -177,7 +168,6 @@ export default function Hero() {
                 {word}
               </span>
             ))}
-          <Caret />
         </h1>
 
         {/* Subtitle */}
@@ -268,13 +258,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* CSS for caret blink */}
-      <style>{`
-        @keyframes blink {
-          0%, 100% { opacity: 1; }
-          50%       { opacity: 0; }
-        }
-      `}</style>
     </section>
   );
 }

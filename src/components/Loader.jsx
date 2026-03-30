@@ -81,10 +81,8 @@ export default function Loader({ onComplete }) {
 
       {/* Logo */}
       <div ref={logoRef} className="relative z-10 text-center mb-10">
-        <div className="font-mono text-4xl font-black tracking-tight">
-          <span className="text-neon-cyan">&lt;</span>
-          <span className="text-white"> dev </span>
-          <span className="text-neon-purple">/&gt;</span>
+        <div className="font-sans text-4xl font-black tracking-tight text-white">
+          Code By <span className="text-neon-cyan">Sohail</span>
         </div>
         <p className="text-slate-500 text-xs font-mono mt-2 tracking-widest uppercase">
           Portfolio

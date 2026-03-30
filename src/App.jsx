@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
 import Navbar  from "./components/Navbar";
 import Hero     from "./components/Hero";
 import Skills   from "./components/Skills";
@@ -10,6 +11,14 @@ import { useLenis } from "./hooks/useLenis";
 export default function App() {
   const [loading, setLoading] = useState(true);
   
+  // Framer Motion Scroll Progress
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   // Initialize Lenis smooth scroll globally
   useLenis();
 
@@ -17,6 +26,12 @@ export default function App() {
     <>
       {loading && <Loader onComplete={() => setLoading(false)} />}
       
+      {/* Scroll Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[3px] bg-neon-cyan origin-left z-[9999]"
+        style={{ scaleX }}
+      />
+
       <div className="dark min-h-screen bg-dark-950 text-white antialiased">
         <Navbar />
 
