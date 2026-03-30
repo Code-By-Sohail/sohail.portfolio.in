@@ -97,7 +97,7 @@ export default function Navbar() {
                 text-sm font-semibold text-dark-950
                 bg-btn-neon
                 shadow-neon-cyan
-                hover:shadow-neon-purple
+                hover:shadow-neon-blue
                 transition-all duration-300
                 hover:scale-105 active:scale-95
                 overflow-hidden group interactive
@@ -121,8 +121,8 @@ export default function Navbar() {
           aria-label="Open menu"
         >
           <span className="block w-6 h-0.5 bg-neon-cyan rounded-full" />
-          <span className="block w-4 h-0.5 bg-neon-purple rounded-full" />
-          <span className="block w-6 h-0.5 bg-neon-pink rounded-full" />
+          <span className="block w-4 h-0.5 bg-neon-blue rounded-full" />
+          <span className="block w-6 h-0.5 bg-neon-emerald rounded-full" />
         </button>
       </nav>
     </header>

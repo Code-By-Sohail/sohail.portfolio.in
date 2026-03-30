@@ -7,8 +7,8 @@
 /* ─── CSS Custom Properties ─────────────────────────────────── */
 :root {
   --neon-cyan: #00f5ff;
-  --neon-purple: #b44fff;
-  --neon-pink: #ff2d78;
+  --neon-blue: #0088ff;
+  --neon-emerald: #00ffa3;
   --dark-950: #050508;
   --dark-900: #0a0a12;
   --dark-800: #10101e;
@@ -46,7 +46,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--neon-purple);
+  background: var(--neon-blue);
   border-radius: 99px;
 }
 
@@ -57,7 +57,7 @@ body {
 /* ─── Utility: Neon text gradient ───────────────────────────── */
 @layer utilities {
   .text-neon-gradient {
-    background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-purple) 60%, var(--neon-pink) 100%);
+    background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-blue) 60%, var(--neon-emerald) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -99,7 +99,7 @@ body {
     left: 0;
     width: 0%;
     height: 1.5px;
-    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-blue));
     transition: width 0.3s ease;
     border-radius: 99px;
   }

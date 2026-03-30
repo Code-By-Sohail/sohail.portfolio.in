@@ -23,23 +23,23 @@ export default {
         // Neon accent palette
         neon: {
           cyan: "#00f5ff",
-          purple: "#b44fff",
-          pink: "#ff2d78",
+          blue: "#0088ff",
+          emerald: "#00ffa3",
           green: "#39ff14",
         },
       },
       backgroundImage: {
         "hero-gradient":
-          "radial-gradient(ellipse 80% 60% at 50% -10%, rgba(180,79,255,0.18) 0%, transparent 70%), radial-gradient(ellipse 60% 40% at 80% 80%, rgba(0,245,255,0.12) 0%, transparent 60%)",
+          "radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,136,255,0.18) 0%, transparent 70%), radial-gradient(ellipse 60% 40% at 80% 80%, rgba(0,245,255,0.12) 0%, transparent 60%)",
         "btn-neon":
-          "linear-gradient(135deg, #00f5ff 0%, #b44fff 100%)",
+          "linear-gradient(135deg, #00f5ff 0%, #0088ff 100%)",
         "btn-neon-hover":
-          "linear-gradient(135deg, #b44fff 0%, #ff2d78 100%)",
+          "linear-gradient(135deg, #0088ff 0%, #00ffa3 100%)",
       },
       boxShadow: {
         "neon-cyan": "0 0 20px 2px rgba(0,245,255,0.45)",
-        "neon-purple": "0 0 20px 2px rgba(180,79,255,0.45)",
-        "neon-pink": "0 0 20px 2px rgba(255,45,120,0.45)",
+        "neon-blue": "0 0 20px 2px rgba(0,136,255,0.45)",
+        "neon-emerald": "0 0 20px 2px rgba(0,255,163,0.45)",
         "glass": "0 4px 32px 0 rgba(0,0,0,0.45)",
       },
       animation: {

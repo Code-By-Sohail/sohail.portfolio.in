@@ -225,7 +225,7 @@ export default function Skills() {
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full"
           style={{
             background:
-              "radial-gradient(circle, rgba(180,79,255,0.07) 0%, transparent 70%)",
+              "radial-gradient(circle, rgba(0,136,255,0.07) 0%, transparent 70%)",
             filter: "blur(70px)",
           }}
         />

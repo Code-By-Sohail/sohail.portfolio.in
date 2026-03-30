@@ -84,12 +84,12 @@ export default function Hero() {
     >
       {/* ── Ambient orbs ──────────────────────────────────────── */}
       <div ref={orbRef} aria-hidden className="pointer-events-none absolute inset-0">
-        {/* Top-left purple orb */}
+        {/* Top-left blue orb */}
         <div
           className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full"
           style={{
             background:
-              "radial-gradient(circle, rgba(180,79,255,0.22) 0%, rgba(180,79,255,0.05) 50%, transparent 75%)",
+              "radial-gradient(circle, rgba(0,136,255,0.22) 0%, rgba(0,136,255,0.05) 50%, transparent 75%)",
             filter: "blur(40px)",
           }}
         />
@@ -102,12 +102,12 @@ export default function Hero() {
             filter: "blur(40px)",
           }}
         />
-        {/* Centre-right pink accent */}
+        {/* Centre-right emerald accent */}
         <div
           className="absolute top-1/2 right-1/4 w-[300px] h-[300px] rounded-full"
           style={{
             background:
-              "radial-gradient(circle, rgba(255,45,120,0.1) 0%, transparent 70%)",
+              "radial-gradient(circle, rgba(0,255,163,0.1) 0%, transparent 70%)",
             filter: "blur(60px)",
           }}
         />
@@ -181,7 +181,7 @@ export default function Hero() {
           Turning visitors into customers with{" "}
           <span className="text-white font-medium">real-world technical solutions</span>{" "}
           that solve{" "}
-          <span className="text-neon-purple font-medium">your business problems</span>
+          <span className="text-neon-blue font-medium">your business problems</span>
         </p>
 
         {/* CTA Buttons */}
@@ -195,7 +195,7 @@ export default function Hero() {
                 px-8 py-3.5 rounded-full
                 font-semibold text-base text-dark-950
                 bg-btn-neon shadow-neon-cyan
-                hover:shadow-neon-purple hover:scale-105
+                hover:shadow-neon-blue hover:scale-105
                 active:scale-95
                 transition-all duration-300 overflow-hidden interactive
               "
@@ -226,8 +226,8 @@ export default function Hero() {
                 group relative inline-flex items-center gap-2
                 px-8 py-3.5 rounded-full
                 font-semibold text-base text-white
-                border border-neon-purple/50 glass
-                hover:border-neon-purple hover:shadow-neon-purple
+                border border-neon-blue/50 glass
+                hover:border-neon-blue hover:shadow-neon-blue
                 hover:scale-105 active:scale-95
                 transition-all duration-300 overflow-hidden interactive
               "
@@ -246,7 +246,7 @@ export default function Hero() {
                 </svg>
               </span>
               {/* Hover glow fill */}
-              <span className="absolute inset-0 opacity-0 group-hover:opacity-10 bg-neon-purple rounded-full transition-opacity duration-300" />
+              <span className="absolute inset-0 opacity-0 group-hover:opacity-10 bg-neon-blue rounded-full transition-opacity duration-300" />
             </a>
           </MagneticButton>
         </div>

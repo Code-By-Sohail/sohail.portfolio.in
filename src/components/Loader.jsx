@@ -75,7 +75,7 @@ export default function Loader({ onComplete }) {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(180,79,255,0.15) 0%, transparent 70%)",
+            "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,136,255,0.15) 0%, transparent 70%)",
         }}
       />
 
@@ -97,7 +97,7 @@ export default function Loader({ onComplete }) {
             className="h-full rounded-full"
             style={{
               width: "0%",
-              background: "linear-gradient(90deg, #00f5ff, #b44fff)",
+              background: "linear-gradient(90deg, #00f5ff, #0088ff)",
               boxShadow: "0 0 10px rgba(0,245,255,0.6)",
             }}
           />

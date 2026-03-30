@@ -35,7 +35,7 @@ const PROJECTS = [
     status: "progress",
     statusLabel: "In Progress",
     liveUrl: null,
-    accentColor: "#b44fff",
+    accentColor: "#0088ff",
     highlights: [
       "Dynamic product catalog",
       "AI recommendations",
@@ -69,9 +69,9 @@ function StatusBadge({ status, label }) {
     <span
       className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold"
       style={{
-        background: "rgba(180,79,255,0.12)",
-        color: "#b44fff",
-        border: "1px solid rgba(180,79,255,0.3)",
+        background: "rgba(0,136,255,0.12)",
+        color: "#0088ff",
+        border: "1px solid rgba(0,136,255,0.3)",
       }}
     >
       <svg className="w-2.5 h-2.5 animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -353,7 +353,7 @@ export default function Projects() {
           className="absolute top-20 -left-20 w-[500px] h-[500px] rounded-full"
           style={{
             background:
-              "radial-gradient(circle, rgba(180,79,255,0.05) 0%, transparent 70%)",
+              "radial-gradient(circle, rgba(0,136,255,0.05) 0%, transparent 70%)",
             filter: "blur(80px)",
           }}
         />
