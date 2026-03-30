@@ -54,8 +54,8 @@ export default function Navbar() {
     <header
       ref={navRef}
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled
-          ? "glass border-b border-white/5 shadow-glass"
-          : "bg-transparent"
+        ? "glass border-b border-glass"
+        : "bg-transparent"
         }`}
     >
       <nav className="max-w-7xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
@@ -63,11 +63,11 @@ export default function Navbar() {
         {/* ── Logo ─────────────────────────────────────────────── */}
         <a
           href="#"
-          className="nav-item flex items-center gap-2 group"
+          className="nav-item flex items-center gap-2 group tracking-tighter"
           aria-label="Home"
         >
-          <span className="font-sans text-xl font-bold text-white tracking-wide">
-            Code By <span className="text-neon-cyan">Sohail</span>
+          <span className="font-sans text-xl font-bold text-white uppercase italic">
+            Code By <span className="text-neon-cyan not-italic">Sohail</span>
           </span>
         </a>
 
@@ -78,7 +78,7 @@ export default function Navbar() {
               <a
                 href={href}
                 onClick={(e) => handleNavClick(e, href)}
-                className="nav-link-underline text-slate-300 hover:text-white text-sm font-medium tracking-wide transition-colors duration-200"
+                className="nav-link-underline text-slate-400 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors duration-200"
               >
                 {label}
               </a>
@@ -93,24 +93,14 @@ export default function Navbar() {
               href="#contact"
               onClick={(e) => handleNavClick(e, "#contact")}
               className="
-                relative inline-flex items-center gap-2 px-5 py-2 rounded-full
-                text-sm font-semibold text-dark-950
-                bg-btn-neon
-                shadow-neon-cyan
-                hover:shadow-neon-blue
-                transition-all duration-300
+                relative inline-flex items-center gap-2 px-6 py-2 rounded-full
+                text-xs font-bold uppercase tracking-widest text-dark-950
+                bg-white transition-all duration-300
                 hover:scale-105 active:scale-95
-                overflow-hidden group interactive
+                interactive
               "
             >
-              <span className="relative z-10">Hire Me</span>
-              {/* Hover shimmer */}
-              <span
-                className="
-                  absolute inset-0 opacity-0 group-hover:opacity-100
-                  bg-btn-neon-hover transition-opacity duration-400
-                "
-              />
+              Hire Me
             </a>
           </MagneticButton>
         </div>

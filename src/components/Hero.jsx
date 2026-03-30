@@ -114,11 +114,11 @@ export default function Hero() {
 
         {/* Grid lines overlay */}
         <div
-          className="absolute inset-0 opacity-[0.04]"
+          className="absolute inset-0 opacity-[0.02]"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(0,245,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(0,245,255,0.5) 1px, transparent 1px)",
-            backgroundSize: "80px 80px",
+              "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)",
+            backgroundSize: "100px 100px",
           }}
         />
       </div>
@@ -128,13 +128,12 @@ export default function Hero() {
       <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
 
         {/* Available badge */}
-        <div ref={badgeRef} className="flex justify-center mb-8">
+        <div ref={badgeRef} className="flex justify-center mb-10">
           <span
             className="
               inline-flex items-center gap-2 px-4 py-1.5 rounded-full
-              border border-neon-cyan/30 glass
-              text-neon-cyan text-sm font-mono font-medium
-              shadow-neon-cyan/20
+              border border-white/5 glass
+              text-neon-cyan text-xs font-mono font-medium tracking-wider uppercase
             "
           >
             <span className="relative flex h-2 w-2">
@@ -149,8 +148,8 @@ export default function Hero() {
         <h1
           ref={headlineRef}
           className="
-            text-4xl sm:text-6xl lg:text-7xl font-black leading-[1.08] tracking-tight
-            text-white mb-6 perspective-[1000px]
+            text-4xl sm:text-6xl lg:text-[5rem] font-bold leading-[1.1] tracking-tight
+            text-white mb-8 perspective-[1000px]
           "
           style={{ perspective: "1000px" }}
           aria-label="Hi, I'm Sohail, building high-converting websites for businesses"
@@ -161,8 +160,8 @@ export default function Hero() {
               <span
                 key={i}
                 className={`hero-word inline-block mr-[0.22em] ${word.includes("high-converting") || word.includes("websites") || word.includes("Sohail")
-                    ? "text-neon-gradient"
-                    : "text-white"
+                  ? "text-neon-gradient"
+                  : "text-white"
                   }`}
               >
                 {word}
@@ -192,10 +191,9 @@ export default function Hero() {
               href="#work"
               className="
                 group relative inline-flex items-center gap-2
-                px-8 py-3.5 rounded-full
+                px-10 py-4 rounded-full
                 font-semibold text-base text-dark-950
-                bg-btn-neon shadow-neon-cyan
-                hover:shadow-neon-blue hover:scale-105
+                bg-white shadow-xl hover:scale-105
                 active:scale-95
                 transition-all duration-300 overflow-hidden interactive
               "

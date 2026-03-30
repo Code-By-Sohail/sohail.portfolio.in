@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -47,36 +47,18 @@ const PROJECTS = [
 
 /* ─── Status Badge ───────────────────────────────────────────────── */
 function StatusBadge({ status, label }) {
-  if (status === "live") {
-    return (
-      <span
-        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold"
-        style={{
-          background: "rgba(0,245,255,0.12)",
-          color: "#00f5ff",
-          border: "1px solid rgba(0,245,255,0.3)",
-        }}
-      >
-        <span className="relative flex h-1.5 w-1.5">
-          <span className="absolute inline-flex h-full w-full rounded-full bg-neon-cyan opacity-75 animate-ping" />
-          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-neon-cyan" />
-        </span>
-        {label}
-      </span>
-    );
-  }
+  const color = status === "live" ? "var(--neon-cyan)" : "var(--neon-blue)";
   return (
     <span
-      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold"
-      style={{
-        background: "rgba(0,136,255,0.12)",
-        color: "#0088ff",
-        border: "1px solid rgba(0,136,255,0.3)",
-      }}
+      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase border border-white/10 glass"
+      style={{ color }}
     >
-      <svg className="w-2.5 h-2.5 animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 6v6l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-      </svg>
+      {status === "live" && (
+        <span className="relative flex h-1.5 w-1.5">
+          <span className="absolute inline-flex h-full w-full rounded-full bg-current opacity-75 animate-ping" />
+          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-current" />
+        </span>
+      )}
       {label}
     </span>
   );
@@ -86,6 +68,10 @@ function StatusBadge({ status, label }) {
 function ProjectCard({ project, index }) {
   const cardRef = useRef(null);
   const glowRef = useRef(null);
+  const iframeRef = useRef(null);
+  const containerRef = useRef(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [scale, setScale] = useState(0.3);
 
   useEffect(() => {
     const card = cardRef.current;
@@ -111,37 +97,54 @@ function ProjectCard({ project, index }) {
       }
     );
 
-    /* GSAP hover — float up + glow intensify */
+    /* GSAP hover — subtle lift */
     const onEnter = () => {
-      gsap.to(card, { y: -12, scale: 1.018, duration: 0.38, ease: "power2.out", overwrite: "auto" });
-      gsap.to(glow, { opacity: 1, scale: 1.2, duration: 0.5, ease: "power2.out", overwrite: "auto" });
+      gsap.to(card, { y: -6, duration: 0.4, ease: "power2.out", overwrite: "auto" });
+      gsap.to(glow, { opacity: 0.4, duration: 0.5, ease: "power2.out", overwrite: "auto" });
     };
     const onLeave = () => {
-      gsap.to(card, { y: 0, scale: 1, duration: 0.38, ease: "power2.out", overwrite: "auto" });
-      gsap.to(glow, { opacity: 0, scale: 1, duration: 0.5, ease: "power2.out", overwrite: "auto" });
+      gsap.to(card, { y: 0, duration: 0.4, ease: "power2.out", overwrite: "auto" });
+      gsap.to(glow, { opacity: 0, duration: 0.5, ease: "power2.out", overwrite: "auto" });
     };
 
-    card.addEventListener("mouseenter", onEnter);
-    card.addEventListener("mouseleave", onLeave);
+    if (card) {
+      card.addEventListener("mouseenter", onEnter);
+      card.addEventListener("mouseleave", onLeave);
+    }
     return () => {
-      card.removeEventListener("mouseenter", onEnter);
-      card.removeEventListener("mouseleave", onLeave);
+      if (card) {
+        card.removeEventListener("mouseenter", onEnter);
+        card.removeEventListener("mouseleave", onLeave);
+      }
     };
   }, [index]);
+
+  useLayoutEffect(() => {
+    const updateScale = () => {
+      if (containerRef.current) {
+        const width = containerRef.current.offsetWidth;
+        setScale(width / 1440); // Standard desktop breakpoint
+      }
+    };
+    const observer = new ResizeObserver(updateScale);
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+    updateScale();
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div
       ref={cardRef}
-      className="group relative glass rounded-3xl overflow-hidden border flex flex-col"
-      style={{ borderColor: `${project.accentColor}20` }}
+      className="group relative glass rounded-3xl overflow-hidden border border-glass flex flex-col transition-colors duration-500 hover:border-white/10"
     >
       {/* Hover glow layer */}
       <div
         ref={glowRef}
-        className="absolute inset-0 rounded-3xl pointer-events-none opacity-0"
+        className="absolute inset-0 rounded-3xl pointer-events-none opacity-0 transition-opacity duration-500"
         style={{
-          boxShadow: `0 0 60px 0 ${project.accentColor}30`,
-          border: `1px solid ${project.accentColor}40`,
+          background: `radial-gradient(circle at center, ${project.accentColor}10 0%, transparent 70%)`,
         }}
       />
 
@@ -163,58 +166,81 @@ function ProjectCard({ project, index }) {
       >
         {/* Grid */}
         <div
-          className="absolute inset-0 opacity-[0.07]"
+          className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: `linear-gradient(${project.accentColor} 1px, transparent 1px),
-                              linear-gradient(90deg, ${project.accentColor} 1px, transparent 1px)`,
-            backgroundSize: "44px 44px",
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: "40px 40px",
           }}
         />
 
-        {/* Giant index watermark */}
-        <div className="absolute right-6 bottom-3 font-black text-8xl select-none leading-none"
-          style={{ color: `${project.accentColor}08`, fontVariantNumeric: "tabular-nums" }}>
-          {project.index}
-        </div>
-
-        {/* Centre orb */}
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-36 h-36 rounded-full"
-          style={{
-            background: `radial-gradient(circle, ${project.accentColor}22 0%, transparent 70%)`,
-            filter: "blur(18px)",
-          }}
-        />
-
-        {/* Project name */}
-        <div className="absolute inset-0 flex items-center justify-center px-8">
+        {/* Gigantic Background Title (for loading/fallback) */}
+        <div className="absolute inset-0 flex items-center justify-center px-8 pointer-events-none">
           <span
-            className="font-black text-4xl text-center leading-tight select-none"
-            style={{ color: `${project.accentColor}22` }}
+            className="font-black text-4xl text-center leading-tight select-none transition-opacity duration-700"
+            style={{ color: `${project.accentColor}12`, opacity: isLoaded ? 0 : 1 }}
           >
             {project.title}
           </span>
         </div>
 
+        {/* Live Website Iframe Scaling */}
+        {project.liveUrl && (
+          <div 
+            ref={containerRef}
+            className="absolute inset-0 z-0 overflow-hidden pointer-events-none group-hover:pointer-events-auto"
+          >
+            <div 
+              className="w-[1440px] h-[900px] origin-top-left transition-all duration-700 ease-in-out"
+              style={{
+                transform: `scale(${scale})`, 
+                filter: isLoaded ? "none" : "blur(10px) grayscale(100%)",
+                opacity: isLoaded ? 1 : 0
+              }}
+            >
+              <iframe
+                ref={iframeRef}
+                src={project.liveUrl}
+                className="w-full h-full border-none pointer-events-none group-hover:pointer-events-auto"
+                title={`${project.title} Live Preview`}
+                onLoad={() => setIsLoaded(true)}
+                loading="lazy"
+              />
+            </div>
+            {/* Loading Spinner */}
+            {!isLoaded && (
+              <div className="absolute inset-0 flex items-center justify-center bg-dark-950/20 backdrop-blur-sm">
+                <div className="w-6 h-6 border-2 border-white/20 border-t-white/80 rounded-full animate-spin" />
+              </div>
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-dark-950/50 to-transparent pointer-events-none" />
+          </div>
+        )}
+
+        {/* Giant index watermark (if no liveUrl or loading) */}
+        {!project.liveUrl && (
+          <div className="absolute right-6 bottom-3 font-black text-8xl select-none leading-none pointer-events-none"
+            style={{ color: `${project.accentColor}08`, fontVariantNumeric: "tabular-nums" }}>
+            {project.index}
+          </div>
+        )}
+
         {/* Top-right status */}
-        <div className="absolute top-4 right-4">
+        <div className="absolute top-4 right-4 z-20">
           <StatusBadge status={project.status} label={project.statusLabel} />
         </div>
 
-        {/* External link icon for live */}
+        {/* External link icon for live indicator */}
         {project.liveUrl && (
-          <a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="absolute bottom-4 left-4 flex items-center gap-1.5 text-xs font-mono opacity-40 hover:opacity-100 transition-opacity duration-200"
+          <div
+            className="absolute bottom-4 left-4 z-20 flex items-center gap-1.5 text-[10px] font-bold tracking-widest uppercase opacity-60 pointer-events-none"
             style={{ color: project.accentColor }}
           >
-            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
             </svg>
-            {new URL(project.liveUrl).hostname}
-          </a>
+            Live Site
+          </div>
         )}
       </div>
 
@@ -370,8 +396,7 @@ export default function Projects() {
             <span className="text-neon-gradient">Projects</span>
           </h2>
           <p className="text-slate-400 max-w-xl mx-auto text-base leading-relaxed">
-            Real-world applications built for real clients with real business
-            impact.
+            Real-world applications built for real clients with real business impact.
           </p>
         </div>
 

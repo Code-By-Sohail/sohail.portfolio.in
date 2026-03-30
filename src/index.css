@@ -38,16 +38,16 @@ body {
 
 /* ─── Custom Scrollbar ───────────────────────────────────────── */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--dark-900);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--neon-blue);
-  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -64,17 +64,17 @@ body {
   }
 
   .glow-cyan {
-    text-shadow: 0 0 20px rgba(0, 245, 255, 0.7), 0 0 40px rgba(0, 245, 255, 0.3);
+    text-shadow: 0 0 15px rgba(0, 245, 255, 0.5);
   }
 
-  .border-neon {
-    border: 1px solid rgba(0, 245, 255, 0.25);
+  .border-glass {
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   .glass {
-    background: rgba(16, 16, 30, 0.7);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: rgba(10, 10, 18, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
   }
 
   .noise-overlay::before {

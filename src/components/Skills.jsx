@@ -133,27 +133,22 @@ function SkillCard({ skill, index }) {
   return (
     <div
       ref={cardRef}
-      className="glass rounded-2xl p-6 cursor-default border"
-      style={{ borderColor: `${skill.accent}18` }}
+      className="glass rounded-2xl p-6 cursor-default border border-glass transition-colors duration-500 hover:border-white/10"
     >
       {/* Icon tile */}
       <div
-        className="w-12 h-12 rounded-xl flex items-center justify-center font-mono font-bold text-lg mb-4 select-none"
-        style={{
-          background: `${skill.accent}14`,
-          color: skill.accent,
-          border: `1px solid ${skill.accent}28`,
-        }}
+        className="w-10 h-10 rounded-lg flex items-center justify-center font-bold text-base mb-4 select-none border border-white/5 bg-white/[0.03]"
+        style={{ color: skill.accent }}
       >
         {skill.tag}
       </div>
 
       {/* Name + category */}
       <div className="flex items-start justify-between gap-2 mb-1.5">
-        <h3 className="text-white font-semibold text-base leading-snug">{skill.name}</h3>
+        <h3 className="text-white font-bold text-base leading-snug tracking-tight">{skill.name}</h3>
         <span
-          className="text-xs font-mono px-2 py-0.5 rounded-full flex-shrink-0"
-          style={{ background: `${skill.accent}14`, color: skill.accent }}
+          className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full flex-shrink-0 border border-white/5 opacity-40"
+          style={{ color: skill.accent }}
         >
           {skill.category}
         </span>
@@ -234,16 +229,14 @@ export default function Skills() {
       <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
         {/* Section heading */}
         <div ref={headRef} className="text-center mb-16">
-          <span className="inline-block font-mono text-sm text-neon-cyan tracking-widest uppercase mb-3">
-            What I work with
+          <span className="inline-block font-mono text-xs text-neon-cyan tracking-widest uppercase mb-4">
+            Technical Proficiency
           </span>
-          <h2 className="text-4xl lg:text-5xl font-black text-white mb-4">
-            Skills &amp;{" "}
-            <span className="text-neon-gradient">Technologies</span>
+          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6 tracking-tight">
+            My <span className="text-white/40">Toolstack</span>
           </h2>
-          <p className="text-slate-400 max-w-xl mx-auto text-base leading-relaxed">
-            A curated toolkit I use to design, build, and ship production-grade
-            applications.
+          <p className="text-slate-400 max-w-xl mx-auto text-lg leading-relaxed">
+            I specialize in building performant and scalable web applications using modern industry standards.
           </p>
         </div>
 
