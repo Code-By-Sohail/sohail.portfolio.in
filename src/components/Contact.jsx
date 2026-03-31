@@ -127,10 +127,10 @@ Please find my details below:
               <span className="absolute inline-flex h-full w-full rounded-full bg-neon-cyan opacity-75 animate-ping" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-neon-cyan" />
             </span>
-            Accepting New Clients
+            Available for Freelance Work
           </span>
           <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tight">
-            Ready to scale <span className="text-white/40">your business?</span>
+            Let's build something <span className="text-white/40">awesome together.</span>
           </h2>
         </div>
 
@@ -142,9 +142,9 @@ Please find my details below:
             <div className="absolute inset-0 bg-neon-blue rounded-3xl opacity-10 blur-3xl transition-opacity duration-500 group-hover:opacity-20 pointer-events-none" />
 
             <div className="relative glass p-7 rounded-3xl border border-glass shadow-2xl backdrop-blur-xl">
-              <h3 className="text-2xl font-bold text-white mb-2">Claim your free strategy call</h3>
+              <h3 className="text-2xl font-bold text-white mb-2">Hire me for your next project</h3>
               <p className="text-sm text-slate-400 mb-6">
-                Send your business details on WhatsApp in 1-2 minutes. I will reply with a clear plan, price, and timeline.
+                Tell me about your idea, and I'll get back to you with a free quote and timeline.
               </p>
 
               <div className="flex flex-wrap gap-3 mb-6">

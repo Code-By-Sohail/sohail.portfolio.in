@@ -152,21 +152,34 @@ export default function Hero() {
             text-white mb-8 perspective-[1000px] max-w-4xl mx-auto
           "
           style={{ perspective: "1000px" }}
-          aria-label="Hi, I'm Sohail, building high-converting websites for businesses"
+          aria-label="Hi, I'm Sohail. A Freelance Web Developer & Designer."
         >
-          {"Hi, I'm Sohail, building high-converting websites for businesses"
-            .split(" ")
-            .map((word, i) => (
-              <span
-                key={i}
-                className={`hero-word inline-block mr-[0.22em] ${word.includes("high-converting") || word.includes("websites") || word.includes("Sohail")
-                  ? "text-neon-gradient"
-                  : "text-white"
-                  }`}
-              >
-                {word}
-              </span>
-            ))}
+          {/* Line 1 */}
+          <div className="block overflow-hidden">
+            {"Hi, I'm Sohail."
+              .split(" ")
+              .map((word, i) => (
+                <span
+                  key={i}
+                  className={`hero-word inline-block mr-[0.22em] ${word.includes("Sohail") ? "text-neon-gradient" : "text-white"}`}
+                >
+                  {word}
+                </span>
+              ))}
+          </div>
+          {/* Line 2 */}
+          <div className="block overflow-hidden">
+            {"A Freelance Web Developer & Designer."
+              .split(" ")
+              .map((word, i) => (
+                <span
+                  key={i}
+                  className={`hero-word inline-block mr-[0.22em] ${word.includes("Freelance") || word.includes("Developer") || word.includes("Designer") ? "text-neon-gradient" : "text-white"}`}
+                >
+                  {word}
+                </span>
+              ))}
+          </div>
         </h1>
 
         {/* Subtitle */}
@@ -177,7 +190,7 @@ export default function Hero() {
             max-w-2xl mx-auto mb-10 leading-relaxed
           "
         >
-          I build fast, modern websites and automation that turn visitors into real customers for your business.
+          I help startups and businesses build fast, responsive, and beautiful websites from scratch. Let's bring your ideas to life!
         </p>
 
         {/* CTA Buttons */}
@@ -213,7 +226,7 @@ export default function Hero() {
             </a>
           </MagneticButton>
 
-          {/* Secondary — Contact Me */}
+          {/* Secondary — Hire Me */}
           <MagneticButton className="hero-cta">
             <a
               href="#contact"
@@ -226,10 +239,10 @@ export default function Hero() {
                 hover:scale-105 active:scale-95
                 transition-all duration-300 overflow-hidden interactive
               "
-              aria-label="Contact me"
+              aria-label="Hire me"
             >
               <span className="relative z-10 flex items-center gap-2">
-                Contact Me
+                Hire Me
                 <svg
                   className="w-4 h-4 transition-transform duration-300 group-hover:rotate-12"
                   fill="none"

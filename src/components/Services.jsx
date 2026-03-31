@@ -215,18 +215,10 @@ Please share timeline and what you will do.`;
         {/* Heading */}
         <div ref={headRef} className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tight">
-            Websites <span className="text-white/40">•</span> AI Automation{" "}
-            <span className="text-white/40">•</span> Google Business{" "}
-            <span className="text-white/40">•</span> Indexing / SEO
+            My <span className="text-neon-cyan">Services</span> & Skills
           </h2>
-          <p className="text-slate-300 max-w-2xl mx-auto text-sm font-medium mb-4">
-            Pick what your business actually needs right now.
-          </p>
           <p className="text-slate-300 max-w-2xl mx-auto text-lg leading-relaxed">
-            I help local businesses get more calls and customers with a fast, clean website and smart automation.
-          </p>
-          <p className="text-slate-500 max-w-2xl mx-auto text-sm mt-4">
-            Prices start from ₹5,000+. Final price depends on your project size and needs.
+            I offer a range of freelance services to help you build a strong online presence and automate your business workflows.
           </p>
         </div>
 
