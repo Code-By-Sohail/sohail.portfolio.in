@@ -2,7 +2,6 @@ import { useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import Navbar  from "./components/Navbar";
 import Hero     from "./components/Hero";
-import Skills   from "./components/Skills";
 import Projects from "./components/Projects";
 import Services from "./components/Services";
 import Contact  from "./components/Contact";
@@ -45,9 +44,6 @@ export default function App() {
 
           {/* ── 3. Services ────────────────────────────────────────── */}
           <Services />
-
-          {/* ── 4. Skills ──────────────────────────────────────────── */}
-          <Skills />
 
           {/* ── 4. Contact / Lead Gen ──────────────────────────────── */}
           <Contact />
