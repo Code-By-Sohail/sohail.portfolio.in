@@ -294,58 +294,77 @@ Please share timeline and what you will do.`;
           />
         </div>
 
-        {/* How it works */}
-        <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-          <div className="glass border border-glass rounded-3xl p-7">
-            <h3 className="text-2xl font-bold text-white mb-3">How it works (Simple)</h3>
-            <ol className="space-y-3 text-sm text-slate-300 list-decimal pl-5">
-              <li>You tell me your business + goal (calls, leads, visibility, automation).</li>
-              <li>I confirm scope and timeline (what you need, what you will get).</li>
-              <li>I build / set up (website, automation, Google profile, or SEO setup).</li>
-              <li>You review and we finalize. I guide you on next steps.</li>
-            </ol>
-          </div>
-
-          {/* FAQ */}
-          <div className="glass border border-glass rounded-3xl p-7">
-            <h3 className="text-2xl font-bold text-white mb-3">FAQ (Simple)</h3>
-            <div className="space-y-4">
+        {/* Extra Sections (FAQ & Process) */}
+        <div className="mt-16 flex flex-col gap-8 items-stretch">
+          
+          {/* FAQ (Now First) */}
+          <div className="glass border border-glass rounded-3xl p-7 lg:p-10">
+            <h3 className="text-3xl font-bold text-white mb-8 text-center">Frequently Asked Questions</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
               <div>
                 <p className="text-white font-bold text-sm">Do you work for all cities?</p>
-                <p className="text-slate-400 text-sm mt-1">Yes, I can work with clients from any city (online).</p>
+                <p className="text-slate-400 text-xs mt-1 leading-relaxed">Yes, I work with clients globally (online).</p>
               </div>
               <div>
                 <p className="text-white font-bold text-sm">Do you provide hosting/domain?</p>
-                <p className="text-slate-400 text-sm mt-1">I can help, but depends on your project.</p>
+                <p className="text-slate-400 text-xs mt-1 leading-relaxed">I can help with the setup, but the final cost/ownership depends on your project.</p>
               </div>
               <div>
                 <p className="text-white font-bold text-sm">Is there a guarantee for ranking on Google?</p>
-                <p className="text-slate-400 text-sm mt-1">No. But I do correct setup for indexing and basic SEO.</p>
+                <p className="text-slate-400 text-xs mt-1 leading-relaxed">No. But I do the correct technical setup for indexing and basic SEO to give you the best start.</p>
               </div>
               <div>
                 <p className="text-white font-bold text-sm">Do you write content too?</p>
-                <p className="text-slate-400 text-sm mt-1">I can help with drafts and structure. You share your business details.</p>
+                <p className="text-slate-400 text-xs mt-1 leading-relaxed">I can help with drafts and structure. You just need to share your core business details.</p>
               </div>
               <div>
                 <p className="text-white font-bold text-sm">How many revisions?</p>
-                <p className="text-slate-400 text-sm mt-1">Usually 2 rounds (depends on project scope).</p>
+                <p className="text-slate-400 text-xs mt-1 leading-relaxed">Usually 2 rounds to make sure you are completely happy with the result.</p>
               </div>
               <div>
                 <p className="text-white font-bold text-sm">How do we start?</p>
-                <p className="text-slate-400 text-sm mt-1">You send details on WhatsApp. I confirm scope, timeline, and the next steps.</p>
+                <p className="text-slate-400 text-xs mt-1 leading-relaxed">Send your details on WhatsApp. I'll confirm the scope, timeline, and next steps.</p>
               </div>
               <div>
                 <p className="text-white font-bold text-sm">What do you need from me?</p>
-                <p className="text-slate-400 text-sm mt-1">
-                  For websites: business info, logo/photos, and what pages you want. For SEO/indexing: your site link and access to Search Console (if you have it).
+                <p className="text-slate-400 text-xs mt-1 leading-relaxed">
+                  For websites: business info, logo, and page lists. For SEO: site link and Search Console access (if you have it).
                 </p>
               </div>
               <div>
                 <p className="text-white font-bold text-sm">Can you work with an existing website?</p>
-                <p className="text-slate-400 text-sm mt-1">Yes. I can update/design improvements, and I can also do indexing/SEO setup for your existing site.</p>
+                <p className="text-slate-400 text-xs mt-1 leading-relaxed">Yes. I can update/design improvements, and also do technical SEO setup for existing sites.</p>
               </div>
             </div>
           </div>
+
+          {/* How it works (Now Second) */}
+          <div className="glass border border-glass rounded-3xl p-7 lg:p-10">
+            <h3 className="text-3xl font-bold text-white mb-8 text-center">How It Works</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+              <div className="flex flex-col items-center text-center">
+                <div className="w-12 h-12 rounded-full bg-neon-cyan/10 border border-neon-cyan/20 flex items-center justify-center text-neon-cyan font-bold mb-4">1</div>
+                <h4 className="text-white font-bold text-sm mb-2">Tell Me Your Goal</h4>
+                <p className="text-slate-400 text-xs">Share your business details and what you need (calls, leads, visibility).</p>
+              </div>
+              <div className="flex flex-col items-center text-center">
+                <div className="w-12 h-12 rounded-full bg-neon-cyan/10 border border-neon-cyan/20 flex items-center justify-center text-neon-cyan font-bold mb-4">2</div>
+                <h4 className="text-white font-bold text-sm mb-2">Scope & Timeline</h4>
+                <p className="text-slate-400 text-xs">I confirm the full scope, timeline, and exact deliverables.</p>
+              </div>
+              <div className="flex flex-col items-center text-center">
+                <div className="w-12 h-12 rounded-full bg-neon-cyan/10 border border-neon-cyan/20 flex items-center justify-center text-neon-cyan font-bold mb-4">3</div>
+                <h4 className="text-white font-bold text-sm mb-2">Build & Setup</h4>
+                <p className="text-slate-400 text-xs">I start building your website, automation, or SEO setup.</p>
+              </div>
+              <div className="flex flex-col items-center text-center">
+                <div className="w-12 h-12 rounded-full bg-neon-cyan/10 border border-neon-cyan/20 flex items-center justify-center text-neon-cyan font-bold mb-4">4</div>
+                <h4 className="text-white font-bold text-sm mb-2">Review & Finalize</h4>
+                <p className="text-slate-400 text-xs">You review the final product, and I guide you on the next steps.</p>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>

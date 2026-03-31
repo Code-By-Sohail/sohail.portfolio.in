@@ -25,7 +25,6 @@ export default function Contact() {
     websiteLink: "",
     contactInfo: "",
     budget: "",
-    extraLinks: "",
   });
 
   const baseWhatsAppText = useMemo(() => {
@@ -45,7 +44,6 @@ Please find my details below:
 - Website link: ${form.websiteLink || "[link if yes]"}
 - WhatsApp number / preferred contact time: ${form.contactInfo || "[number + time]"}
 - Rough budget (₹ range): ${form.budget || "[range]"}
-- Extra links/photos: ${form.extraLinks || "[any links/photos]"}
 `;
   }, [form]);
 
@@ -137,7 +135,7 @@ Please find my details below:
         <div className="flex justify-center">
 
           {/* Contact Form / Lead Capture */}
-          <div ref={cardRef} className="w-full max-w-xl mx-auto relative group">
+          <div ref={cardRef} className="w-full max-w-4xl mx-auto relative group">
             {/* Hover glow behind card */}
             <div className="absolute inset-0 bg-neon-blue rounded-3xl opacity-10 blur-3xl transition-opacity duration-500 group-hover:opacity-20 pointer-events-none" />
 
@@ -147,26 +145,7 @@ Please find my details below:
                 Tell me about your idea, and I'll get back to you with a free quote and timeline.
               </p>
 
-              <div className="flex flex-wrap gap-3 mb-6">
-                <span className="inline-flex items-center gap-2 glass border border-glass rounded-full px-4 py-2 text-xs font-bold text-slate-200">
-                  <svg className="w-4 h-4 text-neon-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  Fast start after your message
-                </span>
-                <span className="inline-flex items-center gap-2 glass border border-glass rounded-full px-4 py-2 text-xs font-bold text-slate-200">
-                  <svg className="w-4 h-4 text-neon-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 15a4 4 0 01-4 4H8l-5 3V7a4 4 0 014-4h10a4 4 0 014 4v8z" />
-                  </svg>
-                  Clear WhatsApp updates
-                </span>
-                <span className="inline-flex items-center gap-2 glass border border-glass rounded-full px-4 py-2 text-xs font-bold text-slate-200">
-                  <svg className="w-4 h-4 text-neon-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m-7 8h8a2 2 0 002-2V8a2 2 0 00-2-2h-2l-1-1h-2l-1 1H9a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                  Correct setup for indexing & SEO
-                </span>
-              </div>
+
 
               <form className="space-y-4" onSubmit={handleSubmit}>
                 {/* Basic info */}
@@ -278,17 +257,9 @@ Please find my details below:
                 {/* Notes */}
                 <textarea
                   placeholder="Tell me about your business goals in 2–3 lines..."
-                  rows="3"
+                  rows="2"
                   value={form.goals}
                   onChange={(e) => setForm((prev) => ({ ...prev, goals: e.target.value }))}
-                  className="w-full bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors resize-none"
-                />
-
-                <textarea
-                  placeholder="Any extra links/photos or notes you want to share..."
-                  rows="3"
-                  value={form.extraLinks}
-                  onChange={(e) => setForm((prev) => ({ ...prev, extraLinks: e.target.value }))}
                   className="w-full bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors resize-none"
                 />
 
