@@ -3,8 +3,8 @@ import gsap from "gsap";
 import MagneticButton from "./MagneticButton";
 
 const NAV_LINKS = [
-  { label: "About", href: "#about" },
   { label: "Work", href: "#work" },
+  { label: "Services", href: "#services" },
   { label: "Skills", href: "#skills" },
   { label: "Contact", href: "#contact" },
 ];

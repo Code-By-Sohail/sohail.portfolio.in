@@ -11,7 +11,7 @@ const PROJECTS = [
     title: "Sonu Fitness",
     subtitle: "Gym Management & E-commerce Platform",
     description:
-      "A full-stack gym management system built for a real client. Handles member registration, invoice PDF generation, an online supplement store, and an admin dashboard with live revenue and membership analytics.",
+      "A full-stack gym management system built for a real client. Handles member registration, invoice PDF generation, an online supplement store, and an admin dashboard with live revenue and membership analytics. It helped the team save time on invoices and track revenue easily.",
     tech: ["React", "Firebase", "Firestore", "Tailwind CSS", "Vite"],
     status: "live",
     statusLabel: "Live",
@@ -30,7 +30,7 @@ const PROJECTS = [
     title: "Electronics Shop",
     subtitle: "Modern E-commerce Platform",
     description:
-      "A feature-rich electronics e-commerce platform with product listings, advanced filtering, cart management, AI-powered recommendations, and a seamless checkout experience. Currently under active development.",
+      "A feature-rich electronics e-commerce platform with product listings, advanced filtering, cart management, AI-powered recommendations, and a seamless checkout experience. Currently under active development. Designed to help owners improve product discovery, reduce friction, and increase sales.",
     tech: ["React", "Node.js", "MongoDB", "Tailwind CSS", "OpenAI API"],
     status: "progress",
     statusLabel: "In Progress",
@@ -301,7 +301,8 @@ function ProjectCard({ project, index }) {
               className="
                 flex-1 inline-flex items-center justify-center gap-2
                 px-5 py-2.5 rounded-xl font-semibold text-sm
-                transition-all duration-300 hover:scale-105 active:scale-95
+                transition-all duration-300 hover:scale-[1.02] active:scale-95
+                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-dark-950
               "
               style={{
                 background: `linear-gradient(135deg, ${project.accentColor}, ${project.accentColor}99)`,
@@ -395,6 +396,9 @@ export default function Projects() {
             Featured{" "}
             <span className="text-neon-gradient">Projects</span>
           </h2>
+          <p className="text-slate-300 max-w-xl mx-auto text-sm font-medium mb-4">
+            Real work for real clients – not just demo projects.
+          </p>
           <p className="text-slate-400 max-w-xl mx-auto text-base leading-relaxed">
             Real-world applications built for real clients with real business impact.
           </p>

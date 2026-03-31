@@ -148,8 +148,8 @@ export default function Hero() {
         <h1
           ref={headlineRef}
           className="
-            text-4xl sm:text-6xl lg:text-[5rem] font-bold leading-[1.1] tracking-tight
-            text-white mb-8 perspective-[1000px]
+            text-3xl sm:text-6xl lg:text-[5rem] font-bold leading-[1.1] tracking-tight
+            text-white mb-8 perspective-[1000px] max-w-4xl mx-auto
           "
           style={{ perspective: "1000px" }}
           aria-label="Hi, I'm Sohail, building high-converting websites for businesses"
@@ -177,10 +177,7 @@ export default function Hero() {
             max-w-2xl mx-auto mb-10 leading-relaxed
           "
         >
-          Turning visitors into customers with{" "}
-          <span className="text-white font-medium">real-world technical solutions</span>{" "}
-          that solve{" "}
-          <span className="text-neon-blue font-medium">your business problems</span>
+          I build fast, modern websites and automation that turn visitors into real customers for your business.
         </p>
 
         {/* CTA Buttons */}

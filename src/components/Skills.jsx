@@ -4,6 +4,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+function prefersReducedMotion() {
+  if (typeof window === "undefined" || !window.matchMedia) return false;
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
 const SKILLS = [
   {
     tag: "⚛",
@@ -79,6 +84,14 @@ function SkillCard({ skill, index }) {
   useEffect(() => {
     const card = cardRef.current;
     const bar = barRef.current;
+    if (!card || !bar) return;
+
+    // Respect reduced-motion: no scroll animations; show final state instantly.
+    if (prefersReducedMotion()) {
+      gsap.set(card, { opacity: 1, y: 0, scale: 1, clearProps: "transform,opacity" });
+      gsap.set(bar, { width: `${skill.level}%` });
+      return;
+    }
 
     /* Scroll-triggered card reveal with stagger offset */
     gsap.fromTo(
@@ -122,23 +135,31 @@ function SkillCard({ skill, index }) {
     const onLeave = () =>
       gsap.to(card, { y: 0, scale: 1, duration: 0.3, ease: "power2.out", overwrite: "auto" });
 
-    card.addEventListener("mouseenter", onEnter);
-    card.addEventListener("mouseleave", onLeave);
+    // Only attach hover listeners on devices that actually hover (avoid mobile jank).
+    const canHover = typeof window !== "undefined" && window.matchMedia?.("(hover: hover)").matches;
+    if (canHover) {
+      card.addEventListener("mouseenter", onEnter);
+      card.addEventListener("mouseleave", onLeave);
+    }
     return () => {
-      card.removeEventListener("mouseenter", onEnter);
-      card.removeEventListener("mouseleave", onLeave);
+      if (canHover) {
+        card.removeEventListener("mouseenter", onEnter);
+        card.removeEventListener("mouseleave", onLeave);
+      }
     };
   }, [index, skill.level]);
 
   return (
     <div
       ref={cardRef}
-      className="glass rounded-2xl p-6 cursor-default border border-glass transition-colors duration-500 hover:border-white/10"
+      className="glass group rounded-2xl p-7 cursor-default border border-glass transition-colors duration-500 hover:border-white/10 min-h-[200px]"
+      style={{ boxShadow: "0 4px 28px rgba(0,0,0,0.35)" }}
     >
       {/* Icon tile */}
       <div
-        className="w-10 h-10 rounded-lg flex items-center justify-center font-bold text-base mb-4 select-none border border-white/5 bg-white/[0.03]"
+        className="w-10 h-10 rounded-lg flex items-center justify-center font-bold text-base mb-4 select-none border border-white/5 bg-white/[0.035]"
         style={{ color: skill.accent }}
+        aria-hidden
       >
         {skill.tag}
       </div>
@@ -147,7 +168,7 @@ function SkillCard({ skill, index }) {
       <div className="flex items-start justify-between gap-2 mb-1.5">
         <h3 className="text-white font-bold text-base leading-snug tracking-tight">{skill.name}</h3>
         <span
-          className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full flex-shrink-0 border border-white/5 opacity-40"
+          className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full flex-shrink-0 border border-white/5 bg-white/[0.03] opacity-60"
           style={{ color: skill.accent }}
         >
           {skill.category}
@@ -155,14 +176,21 @@ function SkillCard({ skill, index }) {
       </div>
 
       {/* Description */}
-      <p className="text-slate-500 text-xs leading-relaxed mb-5">{skill.desc}</p>
+      <p className="text-slate-400/70 text-xs leading-relaxed mb-5">{skill.desc}</p>
 
       {/* Progress bar */}
       <div className="flex items-center gap-3">
-        <div className="flex-1 h-1.5 rounded-full bg-white/5 overflow-hidden">
+        <div
+          className="flex-1 h-1.5 rounded-full bg-white/5 overflow-hidden"
+          role="progressbar"
+          aria-label={`${skill.name} proficiency`}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={skill.level}
+        >
           <div
             ref={barRef}
-            className="h-full rounded-full"
+            className="h-full rounded-full group-hover:brightness-110 transition-[filter] duration-300"
             style={{
               background: `linear-gradient(90deg, ${skill.accent}88, ${skill.accent})`,
               width: 0,
@@ -232,16 +260,19 @@ export default function Skills() {
           <span className="inline-block font-mono text-xs text-neon-cyan tracking-widest uppercase mb-4">
             Technical Proficiency
           </span>
-          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6 tracking-tight">
+          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tight">
             My <span className="text-white/40">Toolstack</span>
           </h2>
+          <p className="text-slate-300 max-w-xl mx-auto text-sm font-medium mb-4">
+            Tools I use daily on client projects, not just tutorials.
+          </p>
           <p className="text-slate-400 max-w-xl mx-auto text-lg leading-relaxed">
             I specialize in building performant and scalable web applications using modern industry standards.
           </p>
         </div>
 
         {/* Skills grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
           {SKILLS.map((skill, i) => (
             <SkillCard key={skill.name} skill={skill} index={i} />
           ))}

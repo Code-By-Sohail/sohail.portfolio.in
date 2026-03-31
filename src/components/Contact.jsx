@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MagneticButton from "./MagneticButton";
@@ -9,7 +9,45 @@ export default function Contact() {
   const sectionRef = useRef(null);
   const headRef = useRef(null);
   const cardRef = useRef(null);
-  const infoRef = useRef(null);
+
+  const WHATSAPP_NUMBER = "9712376801"; // +91 included already (wa.me expects number without +)
+
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    goals: "",
+    businessName: "",
+    businessType: "",
+    city: "",
+    serviceNeeded: "",
+    mainGoal: "",
+    hasWebsite: "",
+    websiteLink: "",
+    contactInfo: "",
+    budget: "",
+    extraLinks: "",
+  });
+
+  const baseWhatsAppText = useMemo(() => {
+    // Simple English template with clear questions for the client.
+    return `Hi Sohail! 👋
+My name: ${form.name || "[Your Name]"}
+Email: ${form.email || "[Your Email]"}
+Business goals / short note: ${form.goals || "[Tell me about your business goals]"}
+
+Please find my details below:
+- Business name: ${form.businessName || "[Business name]"}
+- Business type: ${form.businessType || "[clinic/salon/coaching/shop/other]"}
+- City: ${form.city || "[City]"}
+- Service needed: ${form.serviceNeeded || "[website / AI automation / Google business / indexing & SEO]"}
+- Main goal: ${form.mainGoal || "[calls, leads, visibility, faster replies]"}
+- Already have a website?: ${form.hasWebsite || "[yes/no]"}
+- Website link: ${form.websiteLink || "[link if yes]"}
+- WhatsApp number / preferred contact time: ${form.contactInfo || "[number + time]"}
+- Rough budget (₹ range): ${form.budget || "[range]"}
+- Extra links/photos: ${form.extraLinks || "[any links/photos]"}
+`;
+  }, [form]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -24,24 +62,6 @@ export default function Contact() {
           ease: "power3.out",
           scrollTrigger: {
             trigger: headRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-
-      // Info text fade right
-      gsap.fromTo(
-        infoRef.current,
-        { opacity: 0, x: -30 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          delay: 0.2,
-          scrollTrigger: {
-            trigger: infoRef.current,
             start: "top 85%",
             toggleActions: "play none none none",
           },
@@ -70,6 +90,13 @@ export default function Contact() {
 
     return () => ctx.revert();
   }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const text = encodeURIComponent(baseWhatsAppText);
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
 
   return (
     <section id="contact" ref={sectionRef} className="relative py-28 bg-dark-950 overflow-hidden">
@@ -107,92 +134,163 @@ export default function Contact() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="flex justify-center">
 
-          {/* Left Side: Sales Pitch */}
-          <div ref={infoRef} className="order-2 lg:order-1 flex flex-col items-center lg:items-start text-center lg:text-left">
-            <h3 className="text-3xl font-bold text-white mb-6">
-              Stop losing customers to slow, outdated websites.
-            </h3>
-
-            <ul className="space-y-3 mb-10 w-full max-w-md">
-              <li className="flex items-center gap-3 glass p-4 rounded-xl border border-glass">
-                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-white/[0.03] border border-white/5 text-neon-cyan flex items-center justify-center">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                  </svg>
-                </div>
-                <div className="text-left">
-                  <span className="block text-white font-bold text-sm">Speed is Revenue</span>
-                  <span className="block text-slate-500 text-xs uppercase tracking-wide">Delivered in 3-7 days</span>
-                </div>
-              </li>
-
-              <li className="flex items-center gap-3 glass p-4 rounded-xl border border-glass">
-                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-white/[0.03] border border-white/5 text-neon-blue flex items-center justify-center">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
-                  </svg>
-                </div>
-                <div className="text-left">
-                  <span className="block text-white font-bold text-sm">High Conversion</span>
-                  <span className="block text-slate-500 text-xs uppercase tracking-wide">Optimized for sales</span>
-                </div>
-              </li>
-
-              <li className="flex items-center gap-3 glass p-4 rounded-xl border border-glass">
-                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-white/[0.03] border border-white/5 text-neon-emerald flex items-center justify-center">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-                  </svg>
-                </div>
-                <div className="text-left">
-                  <span className="block text-white font-bold text-sm">Risk-Free</span>
-                  <span className="block text-slate-500 text-xs uppercase tracking-wide">Free consultation call</span>
-                </div>
-              </li>
-            </ul>
-
-            <div className="flex items-center gap-4 text-slate-400 text-sm font-medium">
-              <span className="flex items-center gap-1.5"><svg className="w-4 h-4 text-neon-cyan" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg> No upfront costs</span>
-              <span className="flex items-center gap-1.5"><svg className="w-4 h-4 text-neon-cyan" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg> SEO Optimized</span>
-            </div>
-          </div>
-
-          {/* Right Side: Contact Form / Lead Capture */}
-          <div ref={cardRef} className="order-1 lg:order-2 w-full max-w-md mx-auto relative group">
+          {/* Contact Form / Lead Capture */}
+          <div ref={cardRef} className="w-full max-w-xl mx-auto relative group">
             {/* Hover glow behind card */}
             <div className="absolute inset-0 bg-neon-blue rounded-3xl opacity-10 blur-3xl transition-opacity duration-500 group-hover:opacity-20 pointer-events-none" />
 
-            <div className="relative glass p-8 rounded-3xl border border-glass shadow-2xl backdrop-blur-xl">
+            <div className="relative glass p-7 rounded-3xl border border-glass shadow-2xl backdrop-blur-xl">
               <h3 className="text-2xl font-bold text-white mb-2">Claim your free strategy call</h3>
-              <p className="text-sm text-slate-400 mb-6">Skip the guesswork and let's map out exactly what your business needs to grow.</p>
+              <p className="text-sm text-slate-400 mb-6">
+                Send your business details on WhatsApp in 1-2 minutes. I will reply with a clear plan, price, and timeline.
+              </p>
 
-              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-                <div>
+              <div className="flex flex-wrap gap-3 mb-6">
+                <span className="inline-flex items-center gap-2 glass border border-glass rounded-full px-4 py-2 text-xs font-bold text-slate-200">
+                  <svg className="w-4 h-4 text-neon-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  Fast start after your message
+                </span>
+                <span className="inline-flex items-center gap-2 glass border border-glass rounded-full px-4 py-2 text-xs font-bold text-slate-200">
+                  <svg className="w-4 h-4 text-neon-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 15a4 4 0 01-4 4H8l-5 3V7a4 4 0 014-4h10a4 4 0 014 4v8z" />
+                  </svg>
+                  Clear WhatsApp updates
+                </span>
+                <span className="inline-flex items-center gap-2 glass border border-glass rounded-full px-4 py-2 text-xs font-bold text-slate-200">
+                  <svg className="w-4 h-4 text-neon-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m-7 8h8a2 2 0 002-2V8a2 2 0 00-2-2h-2l-1-1h-2l-1 1H9a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  Correct setup for indexing & SEO
+                </span>
+              </div>
+
+              <form className="space-y-4" onSubmit={handleSubmit}>
+                {/* Basic info */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <input
                     type="text"
-                    placeholder="Your Name"
-                    className="w-full bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors"
+                    placeholder="Your name"
+                    value={form.name}
+                    onChange={(e) => setForm((prev) => ({ ...prev, name: e.target.value }))}
+                    className="bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors"
                     required
                   />
-                </div>
-                <div>
                   <input
                     type="email"
-                    placeholder="Your Email"
-                    className="w-full bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors"
+                    placeholder="Your email"
+                    value={form.email}
+                    onChange={(e) => setForm((prev) => ({ ...prev, email: e.target.value }))}
+                    className="bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors"
                     required
                   />
                 </div>
-                <div>
-                  <textarea
-                    placeholder="Tell me about your business goals..."
-                    rows="3"
-                    className="w-full bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors resize-none"
+
+                {/* Business info */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <input
+                    type="text"
+                    placeholder="Business name"
+                    value={form.businessName}
+                    onChange={(e) => setForm((prev) => ({ ...prev, businessName: e.target.value }))}
+                    className="bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors"
+                    required
+                  />
+                  <input
+                    type="text"
+                    placeholder="Business type (clinic/salon/coaching/shop/other)"
+                    value={form.businessType}
+                    onChange={(e) => setForm((prev) => ({ ...prev, businessType: e.target.value }))}
+                    className="bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors"
                     required
                   />
                 </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <input
+                    type="text"
+                    placeholder="Your city (optional)"
+                    value={form.city}
+                    onChange={(e) => setForm((prev) => ({ ...prev, city: e.target.value }))}
+                    className="bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Service needed (website / AI / Google / SEO)"
+                    value={form.serviceNeeded}
+                    onChange={(e) => setForm((prev) => ({ ...prev, serviceNeeded: e.target.value }))}
+                    className="bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors"
+                    required
+                  />
+                </div>
+
+                {/* Goals & website */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <input
+                    type="text"
+                    placeholder="Main goal (calls, leads, visibility, speed)"
+                    value={form.mainGoal}
+                    onChange={(e) => setForm((prev) => ({ ...prev, mainGoal: e.target.value }))}
+                    className="bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors"
+                    required
+                  />
+                  <input
+                    type="text"
+                    placeholder="Do you already have a website? (yes/no)"
+                    value={form.hasWebsite}
+                    onChange={(e) => setForm((prev) => ({ ...prev, hasWebsite: e.target.value }))}
+                    className="bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors"
+                    required
+                  />
+                </div>
+
+                <input
+                  type="text"
+                  placeholder="Website link (if yes)"
+                  value={form.websiteLink}
+                  onChange={(e) => setForm((prev) => ({ ...prev, websiteLink: e.target.value }))}
+                  className="w-full bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors"
+                />
+
+                {/* Contact & budget */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <input
+                    type="text"
+                    placeholder="WhatsApp number / best time to contact"
+                    value={form.contactInfo}
+                    onChange={(e) => setForm((prev) => ({ ...prev, contactInfo: e.target.value }))}
+                    className="bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors"
+                    required
+                  />
+                  <input
+                    type="text"
+                    placeholder="Rough budget (₹ range)"
+                    value={form.budget}
+                    onChange={(e) => setForm((prev) => ({ ...prev, budget: e.target.value }))}
+                    className="bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors"
+                    required
+                  />
+                </div>
+
+                {/* Notes */}
+                <textarea
+                  placeholder="Tell me about your business goals in 2–3 lines..."
+                  rows="3"
+                  value={form.goals}
+                  onChange={(e) => setForm((prev) => ({ ...prev, goals: e.target.value }))}
+                  className="w-full bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors resize-none"
+                />
+
+                <textarea
+                  placeholder="Any extra links/photos or notes you want to share..."
+                  rows="3"
+                  value={form.extraLinks}
+                  onChange={(e) => setForm((prev) => ({ ...prev, extraLinks: e.target.value }))}
+                  className="w-full bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors resize-none"
+                />
 
                 <div className="pt-2">
                   <MagneticButton className="w-full block">
@@ -203,9 +301,10 @@ export default function Contact() {
                        px-8 py-4 rounded-xl
                        font-bold text-base text-dark-950
                        bg-white transition-all duration-300 hover:scale-[1.02] active:scale-95
+                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-dark-950
                      "
                     >
-                      Send Message
+                      Send on WhatsApp
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                       </svg>
