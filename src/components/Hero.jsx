@@ -169,12 +169,12 @@ export default function Hero() {
           </div>
           {/* Line 2 */}
           <div className="block overflow-hidden">
-            {"A Freelance Web Developer & Designer."
+            {"A Freelance Developer."
               .split(" ")
               .map((word, i) => (
                 <span
                   key={i}
-                  className={`hero-word inline-block mr-[0.22em] ${word.includes("Freelance") || word.includes("Developer") || word.includes("Designer") ? "text-neon-gradient" : "text-white"}`}
+                  className={`hero-word inline-block mr-[0.22em] ${word.includes("Freelance") || word.includes("Developer") ? "text-neon-gradient" : "text-white"}`}
                 >
                   {word}
                 </span>
@@ -190,7 +190,7 @@ export default function Hero() {
             max-w-2xl mx-auto mb-10 leading-relaxed
           "
         >
-          I help startups and businesses build fast, responsive, and beautiful websites from scratch. Let's bring your ideas to life!
+          I help startups and businesses build fast, responsive, and beautiful websites and App from scratch. Let's bring your ideas to life!
         </p>
 
         {/* CTA Buttons */}

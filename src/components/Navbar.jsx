@@ -65,9 +65,7 @@ export default function Navbar() {
           className="nav-item flex items-center gap-2 group tracking-tighter"
           aria-label="Home"
         >
-          <span className="font-sans text-xl font-bold text-white uppercase">
-            Sohail <span className="text-neon-cyan">Freelancer</span>
-          </span>
+          {/* Logo text removed for minimal design */}
         </a>
 
         {/* ── Nav Links (desktop) ───────────────────────────────── */}
