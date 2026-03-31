@@ -216,14 +216,23 @@ Please find my details below:
                     className="bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors"
                     required
                   />
-                  <input
-                    type="text"
-                    placeholder="Do you already have a website? (yes/no)"
-                    value={form.hasWebsite}
-                    onChange={(e) => setForm((prev) => ({ ...prev, hasWebsite: e.target.value }))}
-                    className="bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors"
-                    required
-                  />
+                  <div className="relative">
+                    <select
+                      value={form.hasWebsite}
+                      onChange={(e) => setForm((prev) => ({ ...prev, hasWebsite: e.target.value }))}
+                      className={`w-full bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 focus:outline-none focus:border-white/20 transition-colors appearance-none cursor-pointer ${form.hasWebsite === "" ? "text-slate-600" : "text-white"}`}
+                      required
+                    >
+                      <option value="" disabled className="bg-dark-950 text-slate-400">Do you already have a website?</option>
+                      <option value="Yes" className="bg-dark-950 text-white">Yes, I have one</option>
+                      <option value="No" className="bg-dark-950 text-white">No, starting from scratch</option>
+                    </select>
+                    <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-500">
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+                  </div>
                 </div>
 
                 <input

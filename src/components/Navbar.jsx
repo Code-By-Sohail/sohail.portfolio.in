@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { motion, AnimatePresence } from "framer-motion";
 import MagneticButton from "./MagneticButton";
 
 const NAV_LINKS = [
@@ -11,6 +12,7 @@ const NAV_LINKS = [
 export default function Navbar() {
   const navRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   /* ── GSAP: fade-in from top on mount ─────────────────────── */
   useEffect(() => {
@@ -43,10 +45,14 @@ export default function Navbar() {
   /* ── Smooth scroll helper ─────────────────────────────────── */
   const handleNavClick = (e, href) => {
     e.preventDefault();
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    // Delay slightly so the mobile menu unmount doesn't cancel the scroll action
+    setTimeout(() => {
+      const target = document.querySelector(href);
+      if (target) {
+        const topPos = target.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: topPos, behavior: "smooth" });
+      }
+    }, 100);
   };
 
   return (
@@ -102,16 +108,56 @@ export default function Navbar() {
           </MagneticButton>
         </div>
 
-        {/* ── Mobile hamburger (visual only — menu added in future) ─ */}
+        {/* ── Mobile hamburger ─ */}
         <button
-          className="md:hidden nav-item flex flex-col gap-1.5 p-2"
-          aria-label="Open menu"
+          className="md:hidden nav-item flex flex-col gap-1.5 p-2 z-[60] relative"
+          aria-label="Toggle menu"
+          onClick={() => setMenuOpen(!menuOpen)}
         >
-          <span className="block w-6 h-0.5 bg-neon-cyan rounded-full" />
-          <span className="block w-4 h-0.5 bg-neon-blue rounded-full" />
-          <span className="block w-6 h-0.5 bg-neon-emerald rounded-full" />
+          <span className={`block w-6 h-0.5 bg-neon-cyan rounded-full transition-transform duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+          <span className={`block w-4 h-0.5 bg-neon-blue rounded-full transition-opacity duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
+          <span className={`block w-6 h-0.5 bg-neon-emerald rounded-full transition-transform duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
         </button>
       </nav>
+
+      {/* Mobile Menu Dropdown */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="md:hidden absolute top-full left-0 right-0 overflow-hidden origin-top shadow-2xl z-[45]"
+          >
+            <div className="bg-[#050505]/95 backdrop-blur-2xl border-b border-white/10 px-6 py-8 flex flex-col gap-6 items-center">
+              {NAV_LINKS.map(({ label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  onClick={(e) => {
+                    handleNavClick(e, href);
+                    setMenuOpen(false);
+                  }}
+                  className="text-slate-300 hover:text-white text-base font-bold uppercase tracking-[0.15em] transition-colors duration-200"
+                >
+                  {label}
+                </a>
+              ))}
+              <a
+                href="#contact"
+                onClick={(e) => {
+                  handleNavClick(e, "#contact");
+                  setMenuOpen(false);
+                }}
+                className="mt-4 w-full max-w-xs text-center py-4 rounded-xl text-xs font-black uppercase tracking-[0.2em] text-[#050505] bg-white hover:bg-slate-200 active:scale-95 transition-all duration-300"
+              >
+                Hire Me
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
