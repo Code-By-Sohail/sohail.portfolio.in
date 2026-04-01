@@ -228,9 +228,7 @@ Goal: ${form.goals || "[Business goal]"}
                   </MagneticButton>
                 </div>
               </form>
-              <p className="text-center text-xs text-slate-500 mt-4 font-mono">
-                Only 2 spots left this week.
-              </p>
+
             </div>
           </div>
 
