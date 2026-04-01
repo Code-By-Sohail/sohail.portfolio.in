@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import MagneticButton from "./MagneticButton";
 
 const NAV_LINKS = [
@@ -15,6 +15,10 @@ export default function Navbar() {
   const navRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // Scroll Progress for the Logo Fill
+  const { scrollYProgress } = useScroll();
+  const fillWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   /* ── GSAP: fade-in from top on mount ─────────────────────── */
   useEffect(() => {
@@ -70,15 +74,25 @@ export default function Navbar() {
         {/* ── Logo ─────────────────────────────────────────────── */}
         <a
           href="#"
-          className="nav-item flex items-center gap-2 group tracking-tighter"
+          className="nav-item flex items-center group active:scale-95 transition-transform duration-300"
           aria-label="Home"
         >
-          <span className="text-2xl font-black bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent select-none">
-            S.
-          </span>
-          <span className="hidden sm:block text-xs font-bold uppercase tracking-[0.2em] text-slate-400 group-hover:text-white transition-colors duration-200">
-            Sohail
-          </span>
+          <div className="relative text-xl font-bold tracking-widest select-none">
+            {/* Background Layer (Whiter Base) */}
+            <span className="text-white/50 whitespace-nowrap">
+              Sohail<span className="text-white/50">.</span>
+            </span>
+            
+            {/* Fill Layer (Cyan-Blue Gradient) */}
+            <motion.div
+              style={{ width: fillWidth }}
+              className="absolute inset-0 border-none overflow-hidden whitespace-nowrap"
+            >
+              <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                Sohail<span className="text-cyan-400">.</span>
+              </span>
+            </motion.div>
+          </div>
         </a>
 
         {/* ── Nav Links (desktop) ───────────────────────────────── */}
