@@ -10,40 +10,23 @@ export default function Contact() {
   const headRef = useRef(null);
   const cardRef = useRef(null);
 
-  const WHATSAPP_NUMBER = "9712376801"; // +91 included already (wa.me expects number without +)
+  const WHATSAPP_NUMBER = "9712376801";
 
   const [form, setForm] = useState({
     name: "",
-    email: "",
-    goals: "",
-    businessName: "",
-    businessType: "",
-    city: "",
+    whatsapp: "",
     serviceNeeded: "",
-    mainGoal: "",
-    hasWebsite: "",
-    websiteLink: "",
-    contactInfo: "",
     budget: "",
+    goals: "",
   });
 
   const baseWhatsAppText = useMemo(() => {
-    // Simple English template with clear questions for the client.
     return `Hi Sohail! 👋
-My name: ${form.name || "[Your Name]"}
-Email: ${form.email || "[Your Email]"}
-Business goals / short note: ${form.goals || "[Tell me about your business goals]"}
-
-Please find my details below:
-- Business name: ${form.businessName || "[Business name]"}
-- Business type: ${form.businessType || "[clinic/salon/coaching/shop/other]"}
-- City: ${form.city || "[City]"}
-- Service needed: ${form.serviceNeeded || "[website / AI automation / Google business / indexing & SEO]"}
-- Main goal: ${form.mainGoal || "[calls, leads, visibility, faster replies]"}
-- Already have a website?: ${form.hasWebsite || "[yes/no]"}
-- Website link: ${form.websiteLink || "[link if yes]"}
-- WhatsApp number / preferred contact time: ${form.contactInfo || "[number + time]"}
-- Rough budget (₹ range): ${form.budget || "[range]"}
+Name: ${form.name || "[Your Name]"}
+WhatsApp: ${form.whatsapp || "[Your Number]"}
+Service needed: ${form.serviceNeeded || "[Service]"}
+Budget: ${form.budget || "[Budget range]"}
+Goal: ${form.goals || "[Business goal]"}
 `;
   }, [form]);
 
@@ -56,7 +39,7 @@ Please find my details below:
         {
           opacity: 1,
           y: 0,
-          duration: 0.85,
+          duration: 0.45,
           ease: "power3.out",
           scrollTrigger: {
             trigger: headRef.current,
@@ -74,9 +57,9 @@ Please find my details below:
           opacity: 1,
           scale: 1,
           y: 0,
-          duration: 0.9,
+          duration: 0.45,
           ease: "power3.out",
-          delay: 0.4,
+          delay: 0.1,
           scrollTrigger: {
             trigger: cardRef.current,
             start: "top 85%",
@@ -146,9 +129,8 @@ Please find my details below:
               </p>
 
 
-
               <form className="space-y-4" onSubmit={handleSubmit}>
-                {/* Basic info */}
+                {/* Row 1: Name + WhatsApp */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <input
                     type="text"
@@ -159,73 +141,54 @@ Please find my details below:
                     required
                   />
                   <input
-                    type="email"
-                    placeholder="Your email"
-                    value={form.email}
-                    onChange={(e) => setForm((prev) => ({ ...prev, email: e.target.value }))}
+                    type="tel"
+                    placeholder="WhatsApp number"
+                    value={form.whatsapp}
+                    onChange={(e) => setForm((prev) => ({ ...prev, whatsapp: e.target.value }))}
                     className="bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors"
                     required
                   />
                 </div>
 
-                {/* Business info */}
+                {/* Row 2: Service + Budget dropdowns */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <input
-                    type="text"
-                    placeholder="Business name"
-                    value={form.businessName}
-                    onChange={(e) => setForm((prev) => ({ ...prev, businessName: e.target.value }))}
-                    className="bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors"
-                    required
-                  />
-                  <input
-                    type="text"
-                    placeholder="Business type (clinic/salon/coaching/shop/other)"
-                    value={form.businessType}
-                    onChange={(e) => setForm((prev) => ({ ...prev, businessType: e.target.value }))}
-                    className="bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors"
-                    required
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <input
-                    type="text"
-                    placeholder="Your city (optional)"
-                    value={form.city}
-                    onChange={(e) => setForm((prev) => ({ ...prev, city: e.target.value }))}
-                    className="bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Service needed (website / AI / Google / SEO)"
-                    value={form.serviceNeeded}
-                    onChange={(e) => setForm((prev) => ({ ...prev, serviceNeeded: e.target.value }))}
-                    className="bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors"
-                    required
-                  />
-                </div>
-
-                {/* Goals & website */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <input
-                    type="text"
-                    placeholder="Main goal (calls, leads, visibility, speed)"
-                    value={form.mainGoal}
-                    onChange={(e) => setForm((prev) => ({ ...prev, mainGoal: e.target.value }))}
-                    className="bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors"
-                    required
-                  />
+                  {/* Service dropdown */}
                   <div className="relative">
                     <select
-                      value={form.hasWebsite}
-                      onChange={(e) => setForm((prev) => ({ ...prev, hasWebsite: e.target.value }))}
-                      className={`w-full bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 focus:outline-none focus:border-white/20 transition-colors appearance-none cursor-pointer ${form.hasWebsite === "" ? "text-slate-600" : "text-white"}`}
+                      value={form.serviceNeeded}
+                      onChange={(e) => setForm((prev) => ({ ...prev, serviceNeeded: e.target.value }))}
+                      className={`w-full bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 focus:outline-none focus:border-white/20 transition-colors appearance-none cursor-pointer ${form.serviceNeeded === "" ? "text-slate-600" : "text-white"}`}
                       required
                     >
-                      <option value="" disabled className="bg-dark-950 text-slate-400">Do you already have a website?</option>
-                      <option value="Yes" className="bg-dark-950 text-white">Yes, I have one</option>
-                      <option value="No" className="bg-dark-950 text-white">No, starting from scratch</option>
+                      <option value="" disabled className="bg-dark-950 text-slate-400">Service needed</option>
+                      <option value="Business Website" className="bg-dark-950 text-white">Business Website</option>
+                      <option value="AI Automation" className="bg-dark-950 text-white">AI Automation</option>
+                      <option value="Google Business Profile" className="bg-dark-950 text-white">Google Business Profile</option>
+                      <option value="SEO & Indexing" className="bg-dark-950 text-white">SEO & Indexing</option>
+                      <option value="Other" className="bg-dark-950 text-white">Other / Not sure</option>
+                    </select>
+                    <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-500">
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+                  </div>
+
+                  {/* Budget dropdown */}
+                  <div className="relative">
+                    <select
+                      value={form.budget}
+                      onChange={(e) => setForm((prev) => ({ ...prev, budget: e.target.value }))}
+                      className={`w-full bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 focus:outline-none focus:border-white/20 transition-colors appearance-none cursor-pointer ${form.budget === "" ? "text-slate-600" : "text-white"}`}
+                      required
+                    >
+                      <option value="" disabled className="bg-dark-950 text-slate-400">Rough budget (₹)</option>
+                      <option value="Under ₹5,000" className="bg-dark-950 text-white">Under ₹5,000</option>
+                      <option value="₹5,000 – ₹10,000" className="bg-dark-950 text-white">₹5,000 – ₹10,000</option>
+                      <option value="₹10,000 – ₹25,000" className="bg-dark-950 text-white">₹10,000 – ₹25,000</option>
+                      <option value="₹25,000 – ₹50,000" className="bg-dark-950 text-white">₹25,000 – ₹50,000</option>
+                      <option value="₹50,000+" className="bg-dark-950 text-white">₹50,000+</option>
+                      <option value="Not decided yet" className="bg-dark-950 text-white">Not decided yet</option>
                     </select>
                     <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-500">
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -235,41 +198,14 @@ Please find my details below:
                   </div>
                 </div>
 
-                <input
-                  type="text"
-                  placeholder="Website link (if yes)"
-                  value={form.websiteLink}
-                  onChange={(e) => setForm((prev) => ({ ...prev, websiteLink: e.target.value }))}
-                  className="w-full bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors"
-                />
-
-                {/* Contact & budget */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <input
-                    type="text"
-                    placeholder="WhatsApp number / best time to contact"
-                    value={form.contactInfo}
-                    onChange={(e) => setForm((prev) => ({ ...prev, contactInfo: e.target.value }))}
-                    className="bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors"
-                    required
-                  />
-                  <input
-                    type="text"
-                    placeholder="Rough budget (₹ range)"
-                    value={form.budget}
-                    onChange={(e) => setForm((prev) => ({ ...prev, budget: e.target.value }))}
-                    className="bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors"
-                    required
-                  />
-                </div>
-
-                {/* Notes */}
+                {/* Row 3: Goal textarea */}
                 <textarea
-                  placeholder="Tell me about your business goals in 2–3 lines..."
-                  rows="2"
+                  placeholder="What's your main goal? (e.g. more calls, leads, online visibility...)"
+                  rows="3"
                   value={form.goals}
                   onChange={(e) => setForm((prev) => ({ ...prev, goals: e.target.value }))}
                   className="w-full bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-white/20 transition-colors resize-none"
+                  required
                 />
 
                 <div className="pt-2">

@@ -85,9 +85,9 @@ function ProjectCard({ project, index }) {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 0.9,
+        duration: 0.45,
         ease: "power3.out",
-        delay: index * 0.18,
+        delay: index * 0.1,
         clearProps: "transform,opacity",
         scrollTrigger: {
           trigger: card,
@@ -346,7 +346,7 @@ export default function Projects() {
         {
           opacity: 1,
           y: 0,
-          duration: 0.85,
+          duration: 0.45,
           ease: "power3.out",
           clearProps: "transform,opacity",
           scrollTrigger: {

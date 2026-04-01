@@ -1,9 +1,14 @@
 import { motion, useScroll, useSpring } from "framer-motion";
-import Navbar  from "./components/Navbar";
-import Hero     from "./components/Hero";
-import Projects from "./components/Projects";
-import Services from "./components/Services";
-import Contact  from "./components/Contact";
+import Navbar       from "./components/Navbar";
+import Hero         from "./components/Hero";
+import Stats        from "./components/Stats";
+import Projects     from "./components/Projects";
+import About        from "./components/About";
+import Services     from "./components/Services";
+import Pricing      from "./components/Pricing";
+import Testimonials from "./components/Testimonials";
+import Contact      from "./components/Contact";
+import Footer       from "./components/Footer";
 import { useLenis } from "./hooks/useLenis";
 
 export default function App() {
@@ -33,15 +38,30 @@ export default function App() {
           {/* ── 1. Hero ────────────────────────────────────────────── */}
           <Hero />
 
-          {/* ── 2. Projects ────────────────────────────────────────── */}
+          {/* ── 2. About Me ────────────────────────────────────────── */}
+          <About />
+
+          {/* ── 3. Stats bar ───────────────────────────────────────── */}
+          <Stats />
+
+          {/* ── 4. Projects ────────────────────────────────────────── */}
           <Projects />
 
-          {/* ── 3. Services ────────────────────────────────────────── */}
+          {/* ── 5. Services ────────────────────────────────────────── */}
           <Services />
 
-          {/* ── 4. Contact / Lead Gen ──────────────────────────────── */}
+          {/* ── 6. Pricing ─────────────────────────────────────────── */}
+          <Pricing />
+
+          {/* ── 7. Testimonials ────────────────────────────────────── */}
+          <Testimonials />
+
+          {/* ── 8. Contact / Lead Gen ──────────────────────────────── */}
           <Contact />
         </main>
+
+        {/* ── Footer ─────────────────────────────────────────────── */}
+        <Footer />
       </div>
     </>
   );

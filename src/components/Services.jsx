@@ -48,7 +48,7 @@ function ServiceCard({
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 0.75,
+        duration: 0.45,
         ease: "power3.out",
         delay: index * 0.05,
         clearProps: "transform,opacity",
@@ -149,7 +149,7 @@ export default function Services() {
         {
           opacity: 1,
           y: 0,
-          duration: 0.85,
+          duration: 0.45,
           ease: "power3.out",
           scrollTrigger: {
             trigger: headRef.current,
