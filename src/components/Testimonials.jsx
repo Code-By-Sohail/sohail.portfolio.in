@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import sonuLogo from "../assets/sonu-fitness.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -9,14 +10,15 @@ const TESTIMONIALS = [
     quote:
       "Sohail ne hamare gym ka poora system banaya — members, invoices, shop sab. Kaam bahut professional tha aur time pe deliver kiya. Highly recommended!",
     name: "Sonu Fitness",
-    role: "Gym Owner, Surat",
+    role: "Gym Owner, Songadh",
     initial: "SF",
+    image: sonuLogo,
     gradient: "from-cyan-400 to-blue-500",
     stars: 5,
   },
   {
     quote:
-      "Website bahut fast aur clean bani. Customers ne bhi compliment kiye. Sohail ne exactly wahi banaya jo main chahta tha, bina bakwaas ke.",
+      "Website bahut fast aur clean bani. Customers ne bhi kaafi compliment diye. Sohail ne meri requirement ko perfectly samjha aur on-time quality work deliver kiya.",
     name: "Local Business Client",
     role: "E-commerce Store Owner",
     initial: "LB",
@@ -95,7 +97,7 @@ export default function Testimonials() {
 
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {TESTIMONIALS.map(({ quote, name, role, initial, gradient, stars }) => (
+          {TESTIMONIALS.map(({ quote, name, role, initial, image, gradient, stars }) => (
             <div
               key={name}
               className="testimonial-card group relative flex flex-col glass border border-white/8 rounded-3xl p-7 hover:border-white/20 transition-all duration-300 hover:-translate-y-1"
@@ -120,8 +122,12 @@ export default function Testimonials() {
 
               {/* Author */}
               <div className="flex items-center gap-3">
-                <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center text-white text-xs font-black flex-shrink-0`}>
-                  {initial}
+                <div className={`w-10 h-10 rounded-full overflow-hidden bg-gradient-to-br ${gradient} flex items-center justify-center text-white text-xs font-black flex-shrink-0`}>
+                  {image ? (
+                    <img src={image} alt={name} className="w-full h-full object-cover" />
+                  ) : (
+                    initial
+                  )}
                 </div>
                 <div>
                   <p className="text-white text-sm font-semibold">{name}</p>
