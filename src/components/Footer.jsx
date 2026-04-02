@@ -137,7 +137,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="pt-8 border-t border-white/[0.05] flex flex-col items-center justify-center gap-4 text-center">
           <p className="text-slate-600 text-xs font-mono">
-            © {currentYear} Sohail. All rights reserved.
+            © {currentYear} Sohail Web Studio . All rights reserved.
           </p>
         </div>
 

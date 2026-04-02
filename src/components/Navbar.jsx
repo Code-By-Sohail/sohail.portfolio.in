@@ -82,7 +82,7 @@ export default function Navbar() {
             <span className="text-white/50 whitespace-nowrap">
               Sohail<span className="text-white/50">.</span>
             </span>
-            
+
             {/* Fill Layer (Cyan-Blue Gradient) */}
             <motion.div
               style={{ width: fillWidth }}
